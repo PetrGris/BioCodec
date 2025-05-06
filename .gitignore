@@ -1,0 +1,47 @@
+# Общие временные и сгенерированные файлы
+*.log
+*.tmp
+*.cache
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Node.js/JS/TS
+node_modules/
+dist/
+build/
+
+# Файлы окружения и секреты
+.env
+.env.*
+
+# Файлы и папки IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Загруженные файлы и базы данных (если не нужны в git)
+cms/uploads/
+cms/database/*.db
+cms/database/*.sqlite
+
+# Игнорировать временные файлы Strapi
+cms/.cache/
+cms/.tmp/
+
+# Игнорировать временные файлы фронтенда
+frontend/node_modules/
+frontend/dist/
+
+# Игнорировать временные файлы бэкенда
+backend/__pycache__/
+backend/*.pyc
+backend/.mypy_cache/ 
