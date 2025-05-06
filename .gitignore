@@ -14,9 +14,9 @@ __pycache__/
 venv/
 
 # Node.js/JS/TS
-node_modules/
-dist/
-build/
+**/node_modules/
+**/dist/
+**/build/
 
 # Файлы окружения и секреты
 .env
