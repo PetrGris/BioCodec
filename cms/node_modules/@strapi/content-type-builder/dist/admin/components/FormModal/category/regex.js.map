@@ -1,0 +1,1 @@
+{"version":3,"file":"regex.js","sources":["../../../../../admin/src/components/FormModal/category/regex.ts"],"sourcesContent":["export const CATEGORY_NAME_REGEX = /^[A-Za-z][-_0-9A-Za-z]*$/;\n"],"names":["CATEGORY_NAME_REGEX"],"mappings":";;AAAO,MAAMA,sBAAsB;;;;"}
