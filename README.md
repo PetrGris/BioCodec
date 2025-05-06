@@ -1,4 +1,4 @@
-# BIOHACKER PORTAL
+# BioDecode PORTAL (BioCodec alternative domain)
 
 Современный портал для биохакеров: отслеживание здоровья, аналитика, библиотека знаний, ИИ-консультанты.
 
