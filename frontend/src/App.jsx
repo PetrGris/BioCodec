@@ -9,6 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SleepPage from './pages/domains/SleepPage';
 import NutritionPage from './pages/domains/NutritionPage';
 import StressPage from './pages/domains/StressPage';
@@ -28,9 +29,7 @@ import ReportsPage from './pages/profile/ReportsPage';
 import AboutPage from './pages/AboutPage';
 
 const PROFILE_MENU = [
-  { icon: <AssessmentIcon sx={{ color: '#673ab7' }} />, label: 'Панель мониторинга', path: '/dashboard' },
-  { icon: <AssessmentIcon sx={{ color: '#1976d2' }} />, label: 'Корреляции', path: '/correlation' },
-  { icon: <AssessmentIcon sx={{ color: '#43a047' }} />, label: 'Отчёты', path: '/reports' },
+  { icon: <ContentCopyIcon sx={{ color: '#673ab7' }} />, label: 'Мои протоколы', path: '/dashboard' },
 ];
 
 const DOMAIN_MENU = [
