@@ -4,9 +4,10 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';
+import { useNavigate, Link } from 'react-router-dom';
 
 // Демо-протоколы
-const DEMO_PROTOCOLS = [
+export const DEMO_PROTOCOLS = [
   {
     id: 1,
     title: 'Здоровый сон',
@@ -19,7 +20,17 @@ const DEMO_PROTOCOLS = [
       { icon: '🌬️', text: 'Проветрить комнату перед сном' },
       { icon: '💊', text: 'Принимать магний вечером' },
     ],
-    author: 'demo',
+    author: { name: 'PetrGris', avatar: 'https://randomuser.me/api/portraits/men/32.jpg' },
+    updated: '2ч назад',
+    forks: 12,
+    stars: 34,
+    views: 120,
+    rating: 4.7,
+    history: [
+      { date: '2024-06-01', action: 'Создан протокол' },
+      { date: '2024-06-02', action: 'Добавлен шаг: Проветрить комнату' },
+      { date: '2024-06-03', action: 'Обновлено описание' },
+    ],
   },
   {
     id: 2,
@@ -33,7 +44,13 @@ const DEMO_PROTOCOLS = [
       { icon: '🚿', text: 'Контрастный душ' },
       { icon: '🍳', text: 'Завтрак с белком и клетчаткой' },
     ],
-    author: 'demo',
+    author: { name: 'demo', avatar: '' },
+    updated: '',
+    forks: 0,
+    stars: 0,
+    views: 0,
+    rating: 0,
+    history: [],
   },
   {
     id: 3,
@@ -47,12 +64,19 @@ const DEMO_PROTOCOLS = [
       { icon: '🥗', text: 'Овощи в каждом приёме пищи' },
       { icon: '🚶', text: 'Прогулка на свежем воздухе 30 минут' },
     ],
-    author: 'demo',
+    author: { name: 'demo', avatar: '' },
+    updated: '',
+    forks: 0,
+    stars: 0,
+    views: 0,
+    rating: 0,
+    history: [],
   },
 ];
 
 export default function DashboardPage() {
   const [protocols, setProtocols] = useState(DEMO_PROTOCOLS);
+  const navigate = useNavigate();
 
   // Заглушки для кнопок
   const handleFork = (protocol) => alert(`Форк протокола: ${protocol.title}`);
@@ -65,13 +89,15 @@ export default function DashboardPage() {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 2 }}>Мои протоколы</Typography>
-      <Button variant="contained" color="primary" sx={{ mb: 3 }} onClick={() => alert('Создать новый протокол (заглушка)')}>Создать протокол</Button>
+      <Typography variant="h4" sx={{ mb: 2, fontWeight: 700 }}>Мои протоколы</Typography>
+      <Button variant="contained" color="primary" sx={{ mb: 3 }} onClick={() => navigate('/protocol/create')}>
+        Создать протокол
+      </Button>
       <Stack spacing={3}>
         {protocols.map(protocol => (
           <Paper key={protocol.id} sx={{ p: 3, borderRadius: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-              <Typography variant="h5" sx={{ fontWeight: 700, mr: 2 }}>{protocol.icon} {protocol.title}</Typography>
+              <Typography variant="h5" sx={{ fontWeight: 700, mr: 2 }} component={Link} to={`/protocol/${protocol.id}`} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>{protocol.icon} {protocol.title}</Typography>
               <Stack direction="row" spacing={1}>
                 {protocol.tags.map(tag => <Chip key={tag} label={tag} size="small" color="primary" />)}
               </Stack>
@@ -87,13 +113,17 @@ export default function DashboardPage() {
             <Divider sx={{ my: 2 }} />
             <Stack direction="row" spacing={2}>
               <Button variant="outlined" startIcon={<ContentCopyIcon />} onClick={() => handleFork(protocol)}>Fork</Button>
-              <Button variant="outlined" startIcon={<EditIcon />} onClick={() => handleEdit(protocol)}>Edit</Button>
+              <Button variant="outlined" startIcon={<EditIcon />} onClick={() => navigate(`/protocol/${protocol.id}`)}>Edit</Button>
               <Button variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={() => handleDelete(protocol)}>Delete</Button>
               <Button variant="outlined" startIcon={<ShareIcon />} onClick={() => handleShare(protocol)}>Share</Button>
             </Stack>
           </Paper>
         ))}
       </Stack>
+      <Box sx={{ mt: 4, p: 2, bgcolor: '#f5f5f5', borderRadius: 2 }}>
+        {/* Здесь будет интеграция с Discourse или собственной системой обсуждений для каждого протокола */}
+        <Typography variant="subtitle2" color="text.secondary">Комментарии и обсуждение протоколов появятся здесь.</Typography>
+      </Box>
     </Box>
   );
 } 

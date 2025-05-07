@@ -10,13 +10,8 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import SleepPage from './pages/domains/SleepPage';
-import NutritionPage from './pages/domains/NutritionPage';
-import StressPage from './pages/domains/StressPage';
-import LongevityPage from './pages/domains/LongevityPage';
-import CognitionPage from './pages/domains/CognitionPage';
-import ActivityPage from './pages/domains/ActivityPage';
-import GeneticsPage from './pages/domains/GeneticsPage';
+import ExtensionIcon from '@mui/icons-material/Extension';
+import ForumIcon from '@mui/icons-material/Forum';
 import NewsPage from './pages/NewsPage';
 import DashboardPage from './pages/DashboardPage';
 import LibraryPage from './pages/LibraryPage';
@@ -27,20 +22,24 @@ import SportConsultantPage from './pages/consultant/SportConsultantPage';
 import CorrelationPage from './pages/profile/CorrelationPage';
 import ReportsPage from './pages/profile/ReportsPage';
 import AboutPage from './pages/AboutPage';
+import CreateProtocolPage from './pages/CreateProtocolPage';
+import ElementListPage from './pages/domains/ElementListPage';
+import AllElementsPage from './pages/domains/AllElementsPage';
+import ELEMENTS_LIBRARY, { RU_TO_EN } from './data/elementsLibrary';
+import RatingPage from './pages/RatingPage';
+import ForumPage from './pages/ForumPage';
+import ProtocolViewPage from './pages/ProtocolViewPage';
 
 const PROFILE_MENU = [
   { icon: <ContentCopyIcon sx={{ color: '#673ab7' }} />, label: 'Мои протоколы', path: '/dashboard' },
 ];
 
-const DOMAIN_MENU = [
-  { icon: <span style={{ fontSize: 22 }}>😴</span>, label: 'Сон', path: '/domain/sleep' },
-  { icon: <span style={{ fontSize: 22 }}>🥗</span>, label: 'Питание', path: '/domain/nutrition' },
-  { icon: <span style={{ fontSize: 22 }}>🧘‍♂️</span>, label: 'Стресс и recovery', path: '/domain/stress' },
-  { icon: <span style={{ fontSize: 22 }}>🧬</span>, label: 'Долголетие', path: '/domain/longevity' },
-  { icon: <span style={{ fontSize: 22 }}>🧠</span>, label: 'Когнитивные функции', path: '/domain/cognition' },
-  { icon: <span style={{ fontSize: 22 }}>🏃‍♂️</span>, label: 'Физическая активность', path: '/domain/activity' },
-  { icon: <span style={{ fontSize: 22 }}>🧬</span>, label: 'Генетика и эпигенетика', path: '/domain/genetics' },
-];
+// Формируем список доменов из ELEMENTS_LIBRARY
+const ELEMENTS_DOMAINS = Object.keys(ELEMENTS_LIBRARY).map(cat => ({
+  label: cat,
+  icon: ELEMENTS_LIBRARY[cat][0]?.icon || '📦',
+  path: `/element/${RU_TO_EN[cat]}`,
+}));
 
 function LeftMenu() {
   const location = useLocation();
@@ -58,13 +57,21 @@ function LeftMenu() {
           <ListItemText primary={item.label} primaryTypographyProps={{ fontSize: 15 }} />
         </ListItem>
       ))}
-      <ListSubheader>Домены</ListSubheader>
-      {DOMAIN_MENU.map((item, i) => (
+      <ListSubheader>Элементы протокола</ListSubheader>
+      {ELEMENTS_DOMAINS.map((item, i) => (
         <ListItem button key={i} component={Link} to={item.path} sx={{ borderRadius: 2, mb: 1, pl: 4, px: 2, bgcolor: location.pathname === item.path ? '#e3f2fd' : 'transparent', fontWeight: location.pathname === item.path ? 700 : 400 }}>
-          <ListItemIcon>{item.icon}</ListItemIcon>
+          <ListItemIcon><span style={{ fontSize: 20 }}>{item.icon}</span></ListItemIcon>
           <ListItemText primary={item.label} primaryTypographyProps={{ fontSize: 15 }} />
         </ListItem>
       ))}
+      <ListItem button component={Link} to={'/elements'} sx={{ borderRadius: 2, mt: 1, px: 2, bgcolor: location.pathname === '/elements' ? '#e3f2fd' : 'transparent', fontWeight: location.pathname === '/elements' ? 700 : 400 }}>
+        <ListItemIcon><ExtensionIcon sx={{ color: '#673ab7' }} /></ListItemIcon>
+        <ListItemText primary={'Все элементы'} primaryTypographyProps={{ fontSize: 16 }} />
+      </ListItem>
+      <ListItem button component={Link} to={'/forum'} sx={{ borderRadius: 2, mt: 1, px: 2, bgcolor: location.pathname === '/forum' ? '#e3f2fd' : 'transparent', fontWeight: location.pathname === '/forum' ? 700 : 400 }}>
+        <ListItemIcon><ForumIcon sx={{ color: '#1976d2' }} /></ListItemIcon>
+        <ListItemText primary={'Форум'} primaryTypographyProps={{ fontSize: 16 }} />
+      </ListItem>
       <ListSubheader>ИИ-консультанты</ListSubheader>
       <ListItem button component={Link} to={'/consultant/biohacking'} sx={{ borderRadius: 2, mb: 1, px: 2, bgcolor: location.pathname === '/consultant/biohacking' ? '#e3f2fd' : 'transparent', fontWeight: location.pathname === '/consultant/biohacking' ? 700 : 400 }}>
         <ListItemIcon><PsychologyIcon sx={{ color: '#1976d2' }} /></ListItemIcon>
@@ -99,15 +106,15 @@ export default function App() {
       <AppBar position="sticky" color="inherit" elevation={1} sx={{ zIndex: 1201 }}>
         <Toolbar sx={{ gap: 2 }}>
           <Typography variant="h5" sx={{ fontWeight: 900, letterSpacing: 2, color: '#111', mr: 2 }}>
-            bioCodec
+            ProtoLab
           </Typography>
           <Typography variant="subtitle1" sx={{ color: '#1976d2', fontWeight: 700, mr: 3 }}>
-            Раскрой код своего здоровья
+            Платформа для создания и обмена протоколами
           </Typography>
-          <Button color="success" variant="contained" sx={{ borderRadius: 3, fontWeight: 700, mr: 1 }}>Учебник</Button>
+          <Button color="success" variant="contained" sx={{ borderRadius: 3, fontWeight: 700, mr: 1 }} component={Link} to="/library">Библиотека</Button>
           <Button color="primary" variant="outlined" sx={{ borderRadius: 3, fontWeight: 700, mr: 1 }}>Приложение</Button>
           <Button color="secondary" variant="outlined" sx={{ borderRadius: 3, fontWeight: 700, mr: 1 }}>Сообщество</Button>
-          <Button color="info" variant="outlined" sx={{ borderRadius: 3, fontWeight: 700, mr: 1 }}>Аптечка</Button>
+          <Button color="info" variant="outlined" sx={{ borderRadius: 3, fontWeight: 700, mr: 1 }} component={Link} to="/rating">Рейтинг</Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1 }}>
             <Avatar src="https://randomuser.me/api/portraits/men/32.jpg" sx={{ width: 32, height: 32 }} />
@@ -133,21 +140,19 @@ export default function App() {
               <Routes>
                 <Route path="/news" element={<NewsPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/protocol/create" element={<CreateProtocolPage />} />
                 <Route path="/correlation" element={<CorrelationPage />} />
                 <Route path="/reports" element={<ReportsPage />} />
                 <Route path="/library" element={<LibraryPage />} />
                 <Route path="/consultant/biohacking" element={<BiohackingCoachPage />} />
                 <Route path="/consultant/nutrition" element={<NutritionConsultantPage />} />
                 <Route path="/consultant/sport" element={<SportConsultantPage />} />
-                {/* Динамические роуты для доменов */}
-                <Route path="/domain/sleep" element={<SleepPage />} />
-                <Route path="/domain/nutrition" element={<NutritionPage />} />
-                <Route path="/domain/stress" element={<StressPage />} />
-                <Route path="/domain/longevity" element={<LongevityPage />} />
-                <Route path="/domain/cognition" element={<CognitionPage />} />
-                <Route path="/domain/activity" element={<ActivityPage />} />
-                <Route path="/domain/genetics" element={<GeneticsPage />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/element/:category" element={<ElementListPage />} />
+                <Route path="/elements" element={<AllElementsPage />} />
+                <Route path="/rating" element={<RatingPage />} />
+                <Route path="/forum" element={<ForumPage />} />
+                <Route path="/protocol/:id" element={<ProtocolViewPage />} />
                 <Route path="*" element={<NewsPage />} />
               </Routes>
             </Grid>
