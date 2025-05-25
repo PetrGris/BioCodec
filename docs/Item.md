@@ -22,7 +22,7 @@
 ## **2. JSON-СТРУКТУРА С КОММЕНТАРИЯМИ**  
 ```json
 {
-  "item": {                  * Основной объект элемента
+  "item": {              // Основной объект элемента
     "name": "string",       / ОБЯЗАТЕЛЬНО. Пример: "Берберин (гидрохлорид 500 мг)"
     "type": "string",       / ОБЯЗАТЕЛЬНО. Тип: pharma|nutraceutical|physical|cognitive|environmental|tech|behavioral|recovery
     "desc": "string",       / ОБЯЗАТЕЛЬНО. Механизм → Эффект. Пример: "Ингибирование SGLT2 → Снижение глюкозы"
